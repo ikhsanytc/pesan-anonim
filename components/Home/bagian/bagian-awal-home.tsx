@@ -3,6 +3,7 @@ import React, { Dispatch, FC, SetStateAction } from "react";
 import { motion } from "motion/react";
 import { ReactTyped } from "react-typed";
 import Wave from "../../svg/wave";
+import Link from "next/link";
 
 type NavbarHomeLayangProps = {
   menuStatus: boolean;
@@ -20,22 +21,22 @@ const BagianAwalHome: FC<NavbarHomeLayangProps> = ({
       <div ref={ref} className="flex p-4 justify-between items-center z-50">
         <h1 className="text-3xl font-bold">Anonim</h1>
         <div className="lg:flex hidden gap-4 text-2xl font-bold">
-          <a href="" className="hover:underline underline-offset-4">
+          <Link href="" className="hover:underline underline-offset-4">
             About
-          </a>
-          <a href="" className="hover:underline underline-offset-4">
+          </Link>
+          <Link href="" className="hover:underline underline-offset-4">
             Blog
-          </a>
-          <a href="" className="hover:underline underline-offset-4">
+          </Link>
+          <Link href="" className="hover:underline underline-offset-4">
             Contact Us
-          </a>
+          </Link>
         </div>
-        <a
-          href=""
+        <Link
+          href="/register"
           className="text-2xl lg:block hidden font-bold hover:text-black"
         >
           Try It
-        </a>
+        </Link>
         {menuStatus ? (
           <div
             onClick={() => setMenuStatus(false)}

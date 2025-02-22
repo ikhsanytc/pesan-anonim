@@ -18,8 +18,10 @@ const Home = () => {
   const bagianQnARef = useRef<HTMLDivElement>(null);
   const bagianKe2Ref = useRef<HTMLDivElement>(null);
   const bagianKe3Ref = useRef<HTMLDivElement>(null);
+  const bagianKe4Ref = useRef<HTMLDivElement>(null);
   const isInViewBagianKe2 = useInViewMotion(bagianKe2Ref);
   const isInViewBagianKe3 = useInViewMotion(bagianKe3Ref);
+  const isInViewBagianKe4 = useInViewMotion(bagianKe4Ref);
   const isInViewBagianQnA = useInViewMotion(bagianQnARef);
   const [menuStatus, setMenuStatus] = useState(false);
   // 1 = Tanyakan saya apapun
@@ -66,7 +68,10 @@ const Home = () => {
         bagianKe3Ref={bagianKe3Ref}
         isInViewBagianKe3={isInViewBagianKe3}
       />
-      <BagianKeempatHome />
+      <BagianKeempatHome
+        bagianKe4Ref={bagianKe4Ref}
+        isInViewBagianKe4={isInViewBagianKe4}
+      />
       <BagianFooterHome />
     </>
   );

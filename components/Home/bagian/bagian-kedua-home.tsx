@@ -27,7 +27,14 @@ const BagianKeduaHome: FC<BagianKeduaHomeProps> = ({
         </span>
         <div className="flex flex-col justify-center items-center min-h-screen">
           <div className="relative">
-            <div className="bg-slate-200 shadow-xl rotate-12 mb-5 w-64 h-32 rounded-xl">
+            <motion.div
+              initial={{ opacity: 0, scale: 0, rotate: 0 }}
+              animate={
+                isInViewBagianKe2 ? { opacity: 1, scale: 1, rotate: 12 } : {}
+              }
+              transition={{ delay: 0.5 }}
+              className="bg-slate-200 shadow-xl rotate-12 mb-5 w-64 h-32 rounded-xl"
+            >
               <div className="bg-gradient-to-br from-indigo-500 to-blue-500 h-1/2 rounded-t-xl flex justify-center items-center text-white">
                 <p className="font-bold text-2xl">Dealbreaker</p>
               </div>
@@ -36,8 +43,15 @@ const BagianKeduaHome: FC<BagianKeduaHomeProps> = ({
                   Mereka tidak suka film marvel
                 </p>
               </div>
-            </div>
-            <div className="absolute top-80 shadow-xl bg-slate-200 mb-5 -rotate-12 w-72 h-32 rounded-xl">
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0, rotate: 0 }}
+              animate={
+                isInViewBagianKe2 ? { opacity: 1, scale: 1, rotate: -12 } : {}
+              }
+              transition={{ delay: 1 }}
+              className="absolute top-80 shadow-xl bg-slate-200 mb-5 -rotate-12 w-72 h-32 rounded-xl"
+            >
               <div className="bg-gradient-to-br from-purple-600 to-blue-500 h-1/2 rounded-t-xl flex justify-center items-center text-white">
                 <p className="font-bold text-2xl">3 Kata</p>
               </div>
@@ -46,8 +60,15 @@ const BagianKeduaHome: FC<BagianKeduaHomeProps> = ({
                   Cantik, Anggun, Mengagumkan.
                 </p>
               </div>
-            </div>
-            <div className="absolute shadow-xl lg:block hidden top-40 right-52 bg-slate-200 mb-5 rotate-12 w-72 h-32 rounded-xl">
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0, rotate: 0 }}
+              animate={
+                isInViewBagianKe2 ? { opacity: 1, scale: 1, rotate: 12 } : {}
+              }
+              transition={{ delay: 1.5 }}
+              className="absolute shadow-xl lg:block hidden top-40 right-52 bg-slate-200 mb-5 rotate-12 w-72 h-32 rounded-xl"
+            >
               <div className="bg-gradient-to-br from-red-600 to-orange-500 h-1/2 rounded-t-xl flex justify-center items-center text-white">
                 <p className="font-bold text-2xl">Tanya jawab</p>
               </div>
@@ -56,8 +77,15 @@ const BagianKeduaHome: FC<BagianKeduaHomeProps> = ({
                   Apa kamu pernah pergi ke kota tua?
                 </p>
               </div>
-            </div>
-            <div className="absolute shadow-xl lg:block hidden top-40 left-60 bg-slate-200 mb-5 -rotate-12 w-72 h-32 rounded-xl">
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0, rotate: 0 }}
+              animate={
+                isInViewBagianKe2 ? { opacity: 1, scale: 1, rotate: -12 } : {}
+              }
+              transition={{ delay: 2 }}
+              className="absolute shadow-xl lg:block hidden top-40 left-60 bg-slate-200 mb-5 -rotate-12 w-72 h-32 rounded-xl"
+            >
               <div className="bg-gradient-to-br from-orange-600 to-red-500 h-1/2 rounded-t-xl flex justify-center items-center text-white">
                 <p className="font-bold text-2xl">Jujur</p>
               </div>
@@ -66,7 +94,7 @@ const BagianKeduaHome: FC<BagianKeduaHomeProps> = ({
                   Aku suka kamu
                 </p>
               </div>
-            </div>
+            </motion.div>
           </div>
           <div className="relative shadow-xl bg-gradient-to-br from-pink-600 to-orange-600 w-32 h-32 rounded-full p-1">
             <img src="/ambatukam.jpeg" className="rounded-full" alt="" />
@@ -75,9 +103,14 @@ const BagianKeduaHome: FC<BagianKeduaHomeProps> = ({
             </div>
           </div>
         </div>
-        <h1 className="text-white text-5xl font-bold text-center mt-20 pb-10 px-4">
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInViewBagianKe2 ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 1 }}
+          className="text-white text-5xl font-bold text-center mt-20 pb-10 px-4"
+        >
           Jawab satu persatu pertanyaan yang muncul
-        </h1>
+        </motion.h1>
       </motion.div>
     </div>
   );

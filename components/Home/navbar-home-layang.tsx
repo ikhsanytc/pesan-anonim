@@ -1,4 +1,5 @@
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
+import Link from "next/link";
 import { Dispatch, FC, SetStateAction } from "react";
 
 type NavbarHomeLayangProps = {
@@ -25,22 +26,22 @@ const NavbarHomeLayang: FC<NavbarHomeLayangProps> = ({
           <>
             <h1 className="text-3xl font-bold">Anonim</h1>
             <div className="lg:flex hidden gap-4 text-2xl font-bold">
-              <a href="" className="hover:underline underline-offset-4">
+              <Link href="" className="hover:underline underline-offset-4">
                 About
-              </a>
-              <a href="" className="hover:underline underline-offset-4">
+              </Link>
+              <Link href="" className="hover:underline underline-offset-4">
                 Blog
-              </a>
-              <a href="" className="hover:underline underline-offset-4">
+              </Link>
+              <Link href="" className="hover:underline underline-offset-4">
                 Contact Us
-              </a>
+              </Link>
             </div>
-            <a
-              href=""
+            <Link
+              href="/register"
               className="text-2xl lg:block hidden font-bold hover:text-pink-500"
             >
               Try It
-            </a>
+            </Link>
             {menuStatus ? (
               <div
                 onClick={() => setMenuStatus(false)}

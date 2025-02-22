@@ -10,12 +10,18 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
+    "@supabase/ssr": "^0.5.2",
+    "@supabase/supabase-js": "^2.48.1",
+    "cropperjs": "^1.6.2",
     "motion": "^12.4.3",
     "next": "15.1.7",
     "react": "^19.0.0",
+    "react-cropper": "^2.3.3",
     "react-device-detect": "^2.2.3",
     "react-dom": "^19.0.0",
+    "react-easy-crop": "^5.2.0",
     "react-intersection-observer": "^9.15.1",
+    "react-toastify": "^11.0.3",
     "react-typed": "^2.0.12"
   },
   "devDependencies": {

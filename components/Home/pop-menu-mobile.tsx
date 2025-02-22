@@ -1,4 +1,5 @@
 import { AnimatePresence, motion } from "motion/react";
+import Link from "next/link";
 import React, { FC } from "react";
 
 type PopMenuMobileProps = {
@@ -22,18 +23,18 @@ const PopMenuMobile: FC<PopMenuMobileProps> = ({ menuStatus }) => {
             className="bg-black min-h-60 w-full p-3 rounded-3xl shadow bg-opacity-80 backdrop-filter backdrop-blur text-white flex justify-center"
           >
             <div className="flex flex-col text-4xl font-bold justify-center gap-2">
-              <a href="" className="hover:underline">
+              <Link href="" className="hover:underline">
                 About
-              </a>
-              <a href="" className="hover:underline">
+              </Link>
+              <Link href="" className="hover:underline">
                 Blog
-              </a>
-              <a href="" className="hover:underline">
+              </Link>
+              <Link href="" className="hover:underline">
                 Contact Us
-              </a>
-              <a href="" className="hover:text-pink-500">
+              </Link>
+              <Link href="/register" className="hover:text-pink-500">
                 Try
-              </a>
+              </Link>
             </div>
           </motion.div>
         ) : null}

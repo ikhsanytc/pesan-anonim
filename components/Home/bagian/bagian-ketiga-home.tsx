@@ -32,20 +32,48 @@ const BagianKetigaHome: FC<BagianKetigaHomeProps> = ({
         className="relative bg-gradient-to-br from-indigo-500 md:w-96 w-64 rounded-3xl to-orange-600 p-2"
       >
         <img src="/amba.png" className="rounded-3xl" alt="" />
-        <div className="absolute -top-10 -left-20 -rotate-12 bg-white md:w-64 w-32 p-2 rounded-full text-center">
+        <motion.div
+          initial={{ opacity: 0, scale: 0, rotate: 0 }}
+          animate={
+            isInViewBagianKe3 ? { opacity: 1, scale: 1, rotate: -12 } : {}
+          }
+          transition={{ delay: 1.5 }}
+          className="absolute -top-10 -left-20 -rotate-12 bg-white md:w-64 w-32 p-2 rounded-full text-center"
+        >
           <p className="font-bold text-lg">Siapa teman baikmu?</p>
-        </div>
-        <div className="absolute -bottom-10 -left-20 -rotate-12 bg-white md:w-64 w-40 p-2 rounded-full text-center">
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, scale: 0, rotate: 0 }}
+          animate={
+            isInViewBagianKe3 ? { opacity: 1, scale: 1, rotate: -12 } : {}
+          }
+          transition={{ delay: 2 }}
+          className="absolute -bottom-10 -left-20 -rotate-12 bg-white md:w-64 w-40 p-2 rounded-full text-center"
+        >
           <p className="font-bold text-lg">
             Hal apa yang masih kamu ingat waktu kecil?
           </p>
-        </div>
-        <div className="absolute -top-10 -right-20 rotate-12 bg-white md:w-64 w-32 p-2 rounded-full text-center">
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, scale: 0, rotate: 0 }}
+          animate={
+            isInViewBagianKe3 ? { opacity: 1, scale: 1, rotate: 12 } : {}
+          }
+          transition={{ delay: 2.5 }}
+          className="absolute -top-10 -right-20 rotate-12 bg-white md:w-64 w-32 p-2 rounded-full text-center"
+        >
           <p className="font-bold text-lg">Tipe kamu yang seperti apa?</p>
-        </div>
-        <div className="absolute -bottom-10 -right-20 rotate-12 bg-white md:w-64 w-40 p-2 rounded-full text-center">
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, scale: 0, rotate: 0 }}
+          animate={
+            isInViewBagianKe3 ? { opacity: 1, scale: 1, rotate: 12 } : {}
+          }
+          transition={{ delay: 3 }}
+          className="absolute -bottom-10 -right-20 rotate-12 bg-white md:w-64 w-40 p-2 rounded-full text-center"
+        >
           <p className="font-bold text-lg">Skill apa yang kamu banggakan?</p>
-        </div>
+        </motion.div>
       </motion.div>
       <motion.h1
         initial={{ opacity: 0, y: 20 }}
