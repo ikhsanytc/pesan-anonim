@@ -39,7 +39,7 @@ const BagianKeduaHome: FC<BagianKeduaHomeProps> = ({
                 <p className="font-bold text-2xl">Dealbreaker</p>
               </div>
               <div className="flex justify-center items-center h-16">
-                <p className="text-lg font-semibold">
+                <p className="text-lg font-semibold text-center">
                   Mereka tidak suka film marvel
                 </p>
               </div>
@@ -56,7 +56,7 @@ const BagianKeduaHome: FC<BagianKeduaHomeProps> = ({
                 <p className="font-bold text-2xl">3 Kata</p>
               </div>
               <div className="flex justify-center items-center h-16">
-                <p className="text-lg font-semibold">
+                <p className="text-lg text-center font-semibold">
                   Cantik, Anggun, Mengagumkan.
                 </p>
               </div>
