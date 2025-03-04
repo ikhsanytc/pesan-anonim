@@ -28,23 +28,28 @@ const ClientPage = () => {
       toast.error("Password tidak boleh kosong");
       return;
     }
-    const res = await fetch("/api/login", {
-      method: "POST",
-      body: JSON.stringify({
-        email,
-        password,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    const data = await res.json();
-    if (data.error) {
-      toast.error(data.message);
-      return;
+    try {
+      const res = await fetch("/api/login", {
+        method: "POST",
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await res.json();
+      if (data.error) {
+        toast.error(data.message);
+        return;
+      }
+      router.push("/home");
+      toast.success("Welcome back!");
+    } catch (e) {
+      console.error(e);
+      toast.error("Terjadi kesalahan");
     }
-    router.push("/home");
-    toast.success("Welcome back!");
   };
   return (
     <div className="flex justify-center flex-col items-center min-h-screen bg-gray-900 text-white">
