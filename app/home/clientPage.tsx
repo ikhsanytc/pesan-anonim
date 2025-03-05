@@ -90,15 +90,20 @@ const ClientPage: FC<ClientPageProps> = ({ user, profile, avatar_url }) => {
           <div className="absolute w-full h-full bg-slate-200 rounded-3xl bg-opacity-5 backdrop-filter backdrop-blur-sm flex flex-col items-center justify-center">
             <ProfileImage path={avatar_url} />
             <h1 className="mt-5 text-white text-xl font-bold">
-              send me anonymous messages!
+              Send me anonymous messages!
             </h1>
           </div>
-          <img src="/background.jpg" className="rounded-3xl" alt="" />
+          <img
+            src="/background.jpg"
+            loading="lazy"
+            className="rounded-3xl"
+            alt=""
+          />
         </div>
         <div className="md:w-[400px] w-[350px] rounded-3xl shadow-xl bg-gray-200 p-4 mt-10 text-center flex flex-col justify-center">
           <h1 className="text-base font-semibold">Copy your link</h1>
           <p className="font-semibold mt-2 mb-2 text-base text-slate-400">
-            {process.env.NEXT_PUBLIC_BASE_URL}/messages/{profile.username}
+            {process.env.NEXT_PUBLIC_BASE_URL}/message/{profile.username}
           </p>
           <button
             onClick={handleCopy}

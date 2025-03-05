@@ -3,6 +3,8 @@ import React, { FormEvent, useState } from "react";
 import { toast } from "react-toastify";
 import { motion } from "motion/react";
 import { useRouter } from "next/navigation";
+import { ArrowLeftIcon } from "@heroicons/react/24/solid";
+import Link from "next/link";
 
 const ClientPage = () => {
   const [email, setEmail] = useState("");
@@ -53,6 +55,12 @@ const ClientPage = () => {
   };
   return (
     <div className="flex justify-center flex-col items-center min-h-screen bg-gray-900 text-white">
+      <div
+        onClick={() => router.back()}
+        className="absolute top-5 left-5 cursor-pointer hover:scale-110 transition duration-150 -translate-y-1"
+      >
+        <ArrowLeftIcon className="w-6" />
+      </div>
       <h1 className="text-4xl text-center font-bold mb-6">Login ke akunmu</h1>
       <form onSubmit={submit}>
         <div className="bg-gray-800 shadow-xl py-4 px-6 rounded-full flex items-center">

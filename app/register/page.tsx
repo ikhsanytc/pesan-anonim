@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 const Register = async () => {
   const user = await getUser();
   if (user) {
-    redirect("/");
+    redirect("/home");
   }
   return <ClientPage />;
 };
