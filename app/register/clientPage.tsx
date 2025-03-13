@@ -9,18 +9,20 @@ import Proses from "./proses";
 const ClientPage = () => {
   const [currentPage, setCurrentPage] = useState("age");
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-900 text-white">
-      <AnimatePresence mode="wait">
-        {currentPage === "age" ? (
-          <Age setCurrentPage={setCurrentPage} />
-        ) : currentPage === "username" ? (
-          <Username setCurrentPage={setCurrentPage} />
-        ) : currentPage === "avatar" ? (
-          <Avatar setCurrentPage={setCurrentPage} />
-        ) : currentPage === "proses" ? (
-          <Proses setCurrentPage={setCurrentPage} />
-        ) : null}
-      </AnimatePresence>
+    <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-indigo-600 via-purple-500 to-indigo-600 text-white">
+      <div className="z-50">
+        <AnimatePresence mode="wait">
+          {currentPage === "age" ? (
+            <Age setCurrentPage={setCurrentPage} />
+          ) : currentPage === "username" ? (
+            <Username setCurrentPage={setCurrentPage} />
+          ) : currentPage === "avatar" ? (
+            <Avatar setCurrentPage={setCurrentPage} />
+          ) : currentPage === "proses" ? (
+            <Proses setCurrentPage={setCurrentPage} />
+          ) : null}
+        </AnimatePresence>
+      </div>
     </div>
   );
 };

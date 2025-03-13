@@ -12,6 +12,7 @@ export async function POST(req: NextRequest) {
     email = body.email;
     password = body.password;
   } catch (e) {
+    console.error(e);
     return NextResponse.json(
       { error: true, message: "Invalid request" },
       { status: 400 }

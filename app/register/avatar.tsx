@@ -134,13 +134,13 @@ const Avatar: FC<AvatarProps> = ({ setCurrentPage }) => {
               setShowCropper(false);
               return;
             }}
-            className="absolute top-6 right-6 bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600 z-50"
+            className="absolute top-6 right-6 bg-black text-white font-semibold py-2 px-4 rounded-lg hover:bg-gray-800 hover:scale-105 transition duration-150 z-50"
           >
             Cancel
           </button>
           <button
             onClick={handleCropImage}
-            className="absolute bottom-6 right-6 bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 z-50"
+            className="absolute bottom-6 right-6 bg-white/75 text-black transition duration-150 py-2 px-4 rounded-lg hover:bg-white font-semibold hover:scale-105 z-50"
           >
             Save
           </button>
@@ -182,7 +182,7 @@ const Avatar: FC<AvatarProps> = ({ setCurrentPage }) => {
           </div>
           <label
             htmlFor="img"
-            className="bg-blue-500 cursor-pointer mt-5 text-white py-2 px-6 rounded-lg hover:bg-blue-600"
+            className="bg-white/75 cursor-pointer mt-5 text-black hover:scale-105 transition duration-150 py-2 px-6 rounded-lg hover:bg-white font-semibold"
           >
             {croppedImg ? "Ganti avatar" : "Pilih avatar"}
           </label>
@@ -196,14 +196,14 @@ const Avatar: FC<AvatarProps> = ({ setCurrentPage }) => {
           />
           {croppedImg ? (
             <button
-              className="bg-green-500 cursor-pointer mt-5 text-white py-2 px-6 rounded-lg hover:bg-green-600"
+              className="bg-white/75 cursor-pointer mt-5 text-black hover:scale-105 transition duration-150 py-2 px-6 rounded-lg hover:bg-white font-semibold"
               onClick={handleOnSave}
             >
               Save
             </button>
           ) : (
             <button
-              className="bg-blue-500 cursor-pointer mt-5 text-white py-2 px-6 rounded-lg hover:bg-blue-600"
+              className="bg-white/75 cursor-pointer mt-5 text-black hover:scale-105 transition duration-150 py-2 px-6 rounded-lg hover:bg-white font-semibold"
               onClick={handleOnSaveWithSkip}
             >
               Skip

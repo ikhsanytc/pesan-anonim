@@ -74,13 +74,13 @@ const Age: React.FC<AgeProps> = ({ setCurrentPage }) => {
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0 }}
       key="age"
-      className="flex flex-col items-center justify-center"
+      className="flex flex-col items-center justify-center "
     >
       <h1 className="text-4xl text-center font-bold mb-6">Tentukan umur mu</h1>
       <div className="flex gap-4 mb-6">
         {/* Month Picker */}
         <select
-          className="p-3 bg-gray-800 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="p-3 bg-white/35 backdrop-filter backdrop-blur text-black rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 font-semibold"
           value={selectedMonth}
           disabled={isLoading}
           onChange={(e) => setSelectedMonth(e.target.value)}
@@ -94,7 +94,7 @@ const Age: React.FC<AgeProps> = ({ setCurrentPage }) => {
 
         {/* Year Picker */}
         <select
-          className="p-3 bg-gray-800 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="p-3 bg-white/35 backdrop-filter backdrop-blur rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-blue-500 font-semibold"
           value={selectedYear}
           disabled={isLoading}
           onChange={(e) => setSelectedYear(parseInt(e.target.value, 10))}
@@ -114,19 +114,19 @@ const Age: React.FC<AgeProps> = ({ setCurrentPage }) => {
       <button
         onClick={submit}
         disabled={isLoading}
-        className="bg-blue-500 text-white py-2 px-6 rounded-lg hover:bg-blue-600"
+        className="bg-white/75 text-black font-semibold shadow-xl hover:scale-105 transition duration-150 py-2 px-6 rounded-lg hover:bg-white"
       >
         Continue
       </button>
       <p className="mb-5 mt-5 font-semibold">Or</p>
       <Link
-        className="bg-blue-500 text-white py-2 px-6 rounded-lg hover:bg-blue-600"
+        className="bg-white/75 hover:scale-105 transition duration-150 shadow-xl text-black py-2 px-6 rounded-lg hover:bg-white font-semibold"
         href="/login"
       >
         Login
       </Link>
 
-      <p className="text-xs text-gray-400 mt-4 px-10">
+      <p className="text-xs mt-4 px-10">
         By continuing, you agree to our{" "}
         <a href="#" className="text-blue-500 underline">
           Terms of Use

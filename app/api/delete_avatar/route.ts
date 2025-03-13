@@ -1,12 +1,12 @@
 import { createClient } from "@/utils/supabase/server";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(req: NextRequest) {
-  let avatar: string;
+export async function DELETE(req: NextRequest) {
+  let fileName: string;
   try {
     const body = await req.json();
-    if (!body.avatar) throw new Error("Avatar is required");
-    avatar = body.avatar;
+    if (!body.fileName) throw new Error("File name is required");
+    fileName = body.fileName;
   } catch (e) {
     console.error(e);
     return NextResponse.json(
@@ -21,24 +21,10 @@ export async function POST(req: NextRequest) {
   }
   try {
     const supabase = await createClient();
-    const base64Data = avatar.replace(/^data:image\/png;base64,/, "");
-    const buffer = Buffer.from(base64Data, "base64");
-    const fileName = `avatar_${Date.now()}.png`;
-    const { data, error } = await supabase.storage
-      .from("avatars")
-      .upload(fileName, buffer, {
-        cacheControl: "3600",
-        contentType: "image/png",
-        upsert: false,
-      });
+    const { error } = await supabase.storage.from("avatars").remove([fileName]);
     if (error) {
-      throw new Error(error.message);
+      throw Error(error.message);
     }
-    return NextResponse.json({
-      error: false,
-      message: "Avatar uploaded",
-      fileName: data.path,
-    });
   } catch (e: any) {
     console.error(e);
     if (e.message) {
@@ -55,11 +41,16 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(
       {
         error: true,
-        message: "Error uploading avatar",
+        message: "Error deleting avatar",
       },
       {
         status: 500,
       }
     );
   }
+  return NextResponse.json({
+    error: false,
+    message: "Avatar deleted",
+    fileName: fileName,
+  });
 }

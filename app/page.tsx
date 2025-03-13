@@ -3,15 +3,15 @@ import React, { useRef, useState } from "react";
 import { ArrowDownIcon } from "@heroicons/react/24/solid";
 import { motion, useInView as useInViewMotion } from "motion/react";
 import { useInView } from "react-intersection-observer";
-import PopMenuMobile from "@/components/Home/pop-menu-mobile";
-import BagianAwalHome from "@/components/Home/bagian/bagian-awal-home";
-import NavbarHomeLayang from "@/components/Home/navbar-home-layang";
-import BagianQnAHomeMobile from "@/components/Home/bagian/bagian-qna-home-mobile";
-import BagianQnaHome from "@/components/Home/bagian/bagian-qna-home";
-import BagianKeduaHome from "@/components/Home/bagian/bagian-kedua-home";
-import BagianKetigaHome from "@/components/Home/bagian/bagian-ketiga-home";
-import BagianKeempatHome from "@/components/Home/bagian/bagian-keempat-home";
-import BagianFooterHome from "@/components/Home/bagian/bagian-footer-home";
+import PopMenuMobile from "@/components/LandingPage/pop-menu-mobile";
+import BagianAwalHome from "@/components/LandingPage/bagian/bagian-awal-home";
+import NavbarHomeLayang from "@/components/LandingPage/navbar-home-layang";
+import BagianQnAHomeMobile from "@/components/LandingPage/bagian/bagian-qna-home-mobile";
+import BagianQnaHome from "@/components/LandingPage/bagian/bagian-qna-home";
+import BagianKeduaHome from "@/components/LandingPage/bagian/bagian-kedua-home";
+import BagianKetigaHome from "@/components/LandingPage/bagian/bagian-ketiga-home";
+import BagianKeempatHome from "@/components/LandingPage/bagian/bagian-keempat-home";
+import BagianFooterHome from "@/components/LandingPage/bagian/bagian-footer-home";
 
 const Home = () => {
   const { ref, inView } = useInView();

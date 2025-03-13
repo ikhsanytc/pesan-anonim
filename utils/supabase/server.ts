@@ -2,6 +2,7 @@
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 import ProfileType from "../types/profile";
+import InboxType from "../types/inbox";
 
 export async function createClient() {
   const cookieStore = await cookies();
@@ -72,4 +73,45 @@ export async function checkEmailAndUsername(email: string, username: string) {
     return true;
   }
   return false;
+}
+
+export async function getInbox(): Promise<{
+  message: string;
+  error: boolean;
+  data: InboxType[] | null;
+}> {
+  try {
+    const supabase = await createClient();
+    const profile = await getProfile();
+    if (!profile)
+      return {
+        message: "Profile tidak ditemukan",
+        error: true,
+        data: null,
+      };
+    const { data, error } = await supabase
+      .from("messages")
+      .select("*")
+      .eq("to", profile.username)
+      .order("read", { ascending: true })
+      .order("created_at", { ascending: false });
+    if (error)
+      return {
+        message: error.message,
+        error: true,
+        data: null,
+      };
+    return {
+      message: "Success",
+      error: false,
+      data,
+    };
+  } catch (e) {
+    console.error(e);
+    return {
+      message: "Internal server error",
+      error: true,
+      data: null,
+    };
+  }
 }

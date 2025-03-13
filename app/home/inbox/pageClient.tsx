@@ -1,29 +1,86 @@
 "use client";
-import ProfileType from "@/utils/types/profile";
+import MessageComponent from "@/components/Inbox/message-component";
+import { supabase } from "@/utils/supabase/client";
+import { getInbox } from "@/utils/supabase/server";
+import InboxType from "@/utils/types/inbox";
 import {
   ArrowRightStartOnRectangleIcon,
-  PencilIcon,
+  InboxIcon,
   XCircleIcon,
 } from "@heroicons/react/24/solid";
+import { RealtimePostgresChangesPayload } from "@supabase/supabase-js";
 import { AnimatePresence, motion } from "motion/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 
-type ClientPageProps = {
-  profile: ProfileType;
-  avatar_url: string;
+type InboxClientProps = {
+  username: string;
 };
 
-const ClientPage: FC<ClientPageProps> = ({ profile, avatar_url }) => {
+const InboxClient: FC<InboxClientProps> = ({ username }) => {
   const [logoutMenu, setLogoutMenu] = useState(false);
+  const [inbox, setInbox] = useState<InboxType[]>([]);
+  const [loading, setLoading] = useState(true); // [inbox, setInbox]
   const router = useRouter();
-  const handleCopy = async () => {
-    await navigator.clipboard.writeText(
-      process.env.NEXT_PUBLIC_BASE_URL + "/message/" + profile.username
-    );
-    toast.success("Copied to clipboard!");
+  const inboxRef = useRef<InboxType[]>([]);
+
+  useEffect(() => {
+    (async () => {
+      setLoading(true);
+      const dataInbox = await getInbox();
+      if (dataInbox.error) {
+        toast.error(dataInbox.message);
+        return;
+      }
+      setInbox(dataInbox.data ? dataInbox.data : []);
+      setLoading(false);
+    })();
+  }, []);
+  useEffect(() => {
+    inboxRef.current = inbox;
+  }, [inbox]);
+  useEffect(() => {
+    const channel = supabase
+      .channel("messages")
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "messages" },
+        onPayload
+      )
+      .subscribe();
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, []);
+  const onPayload = (payload: RealtimePostgresChangesPayload<InboxType>) => {
+    if (
+      payload.eventType === "INSERT" &&
+      inboxRef.current &&
+      payload.new.to === username
+    ) {
+      setInbox([payload.new, ...inboxRef.current]);
+    }
+    if (
+      payload.eventType === "UPDATE" &&
+      inboxRef.current &&
+      payload.new.to === username
+    ) {
+      const newInbox = inboxRef.current.map((data) => {
+        if (data.id === payload.new.id) {
+          return payload.new;
+        }
+        return data;
+      });
+      setInbox(newInbox);
+    }
+    if (payload.eventType === "DELETE" && inboxRef.current) {
+      const newInbox = inboxRef.current.filter((data) => {
+        return data.id !== payload.old.id;
+      });
+      setInbox(newInbox);
+    }
   };
   return (
     <>
@@ -68,16 +125,17 @@ const ClientPage: FC<ClientPageProps> = ({ profile, avatar_url }) => {
           ) : null}
         </AnimatePresence>
       </div>
-      <div
+      <motion.div
+        layoutId="bg-white"
         className={`bg-white ${
           logoutMenu && "pointer-events-none"
         } min-h-screen px-4 flex flex-col items-center`}
       >
         <div className="flex relative justify-center gap-4 mt-5 items-center w-full text-xl font-semibold">
-          <Link href="#" className="text-black">
+          <Link href="/home" className="text-slate-500">
             PLAY
           </Link>
-          <Link href="/home/inbox" className="text-slate-500">
+          <Link href="/home/inbox" className="text-black">
             INBOX
           </Link>
 
@@ -94,60 +152,22 @@ const ClientPage: FC<ClientPageProps> = ({ profile, avatar_url }) => {
             />
           </div>
         </div>
-        <div className="md:w-[400px] w-[350px] mt-10 shadow-xl rounded-3xl relative">
-          <div className="absolute w-full h-full bg-slate-200 rounded-3xl bg-opacity-5 backdrop-filter backdrop-blur-sm flex flex-col items-center justify-center">
-            <ProfileImage path={avatar_url} />
-            <h1 className="mt-5 text-white text-xl font-bold">
-              Send me anonymous messages!
-            </h1>
-          </div>
-          <motion.img
-            src="/background.jpg"
-            layoutId="bg-image"
-            loading="lazy"
-            className="rounded-3xl"
-            alt=""
-          />
+        <div className="flex flex-col lg:w-1/2 w-full mt-10 gap-4 items-center">
+          {!loading &&
+            inbox.map((data, i) => <MessageComponent key={i} inbox={data} />)}
+          {loading && <div className="loader"></div>}
+          {!loading && inbox.length === 0 && (
+            <div className="flex flex-col mt-6 justify-center items-center">
+              <InboxIcon className="w-32" />
+              <h1 className="text-3xl font-bold">
+                Your inbox is <span className="text-red-500">empty!</span>
+              </h1>
+            </div>
+          )}
         </div>
-        <div className="md:w-[400px] w-[350px] rounded-3xl shadow-xl bg-gray-200 p-4 mt-10 text-center flex flex-col justify-center">
-          <h1 className="text-base font-semibold">Copy your link</h1>
-          <Link
-            href={`${process.env.NEXT_PUBLIC_BASE_URL}/message/${profile.username}`}
-            target="_blank"
-            className="font-semibold hover:underline mt-2 mb-2 text-base text-slate-400"
-          >
-            {process.env.NEXT_PUBLIC_BASE_URL}/message/{profile.username}
-          </Link>
-          <button
-            onClick={handleCopy}
-            className="w-full py-3 bg-gradient-to-r from-pink-500 to-orange-600 text-white font-bold rounded-full cursor-pointer"
-          >
-            Copy
-          </button>
-        </div>
-      </div>
+      </motion.div>
     </>
   );
 };
 
-type ProfileImageProps = {
-  path: string;
-};
-
-const ProfileImage: FC<ProfileImageProps> = ({ path }) => {
-  const router = useRouter();
-  return (
-    <motion.div
-      layoutId="profileAvatar"
-      onClick={() => router.push("/home/edit_avatar")}
-      className="bg-white relative rounded-full p-1 cursor-pointer hover:bg-opacity-50"
-    >
-      <img src={path} loading="lazy" className="w-24 rounded-full" alt="" />
-      <div className="absolute -bottom-1 right-0 bg-white rounded-full p-2 flex justify-center items-center">
-        <PencilIcon className="w-5" />
-      </div>
-    </motion.div>
-  );
-};
-
-export default ClientPage;
+export default InboxClient;

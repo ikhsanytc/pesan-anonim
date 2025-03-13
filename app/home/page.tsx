@@ -9,5 +9,5 @@ export default async function HomePage() {
     redirect("/register");
   }
   const avatar_url = await getAvatarUrl(profile.avatar_url);
-  return <ClientPage user={user} profile={profile} avatar_url={avatar_url} />;
+  return <ClientPage profile={profile} avatar_url={avatar_url} />;
 }

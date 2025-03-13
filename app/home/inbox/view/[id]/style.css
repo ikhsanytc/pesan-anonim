@@ -1,0 +1,17 @@
+.color-picker {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%; /* Membuatnya bulat */
+  background: conic-gradient(
+    red,
+    yellow,
+    green,
+    cyan,
+    blue,
+    magenta,
+    red
+  ); /* Gradasi warna */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

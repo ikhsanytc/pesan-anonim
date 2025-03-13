@@ -1,20 +1,26 @@
 "use client";
-import Link from "next/link";
-import React from "react";
+import { ChevronLeftIcon } from "@heroicons/react/24/solid";
+import { useRouter } from "next/navigation";
+import React, { FC } from "react";
 
-const Error = () => {
+type ErrorProps = {
+  message?: string;
+};
+
+const Error: FC<ErrorProps> = ({
+  message = "Kami ada kesalahan sedikit di halaman ini 🙏",
+}) => {
+  const router = useRouter();
   return (
-    <div className="bg-gradient-to-br from-indigo-600 via-purple-500 to-orange-600 min-h-screen flex flex-col text-white justify-center items-center">
-      <h1 className="text-6xl font-bold">Oops!</h1>
-      <h2 className="mt-3 text-2xl font-semibold">
-        Kami ada kesalahan sedikit di halaman ini 🙏
-      </h2>
-      <Link
-        href="/"
-        className="bg-indigo-600 hover:scale-105 hover:-translate-y-1 transition duration-150 mt-4 py-3 px-6 text-xl font-semibold rounded-xl"
+    <div className="bg-gradient-to-br from-indigo-600 via-purple-500 to-indigo-700 min-h-screen flex flex-col text-white justify-center items-center">
+      <div
+        onClick={() => router.back()}
+        className="absolute left-5 top-5 cursor-pointer"
       >
-        Kembali
-      </Link>
+        <ChevronLeftIcon className="w-10" />
+      </div>
+      <h1 className="text-6xl font-bold">Oops!</h1>
+      <h2 className="mt-3 text-2xl font-semibold">{message}</h2>
     </div>
   );
 };

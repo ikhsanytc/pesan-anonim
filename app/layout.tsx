@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import { ToastContainer } from "react-toastify";
+import { AnimatePresence } from "motion/react";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -26,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${poppins.variable} antialiased`}>
-        {children}
+        <AnimatePresence mode="wait">{children}</AnimatePresence>
         <ToastContainer theme="dark" />
       </body>
     </html>

@@ -1,11 +1,12 @@
-import { createClient } from "@/utils/supabase/server";
+import { createClient, getUser } from "@/utils/supabase/server";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
   let avatar: string;
+  let public_url: string;
   try {
     const body = await req.json();
-    if (!body.avatar) throw new Error("Avatar is required");
+    if (!body.avatar) throw new Error("Avatar url is required");
     avatar = body.avatar;
   } catch (e) {
     console.error(e);
@@ -21,24 +22,31 @@ export async function POST(req: NextRequest) {
   }
   try {
     const supabase = await createClient();
-    const base64Data = avatar.replace(/^data:image\/png;base64,/, "");
-    const buffer = Buffer.from(base64Data, "base64");
-    const fileName = `avatar_${Date.now()}.png`;
-    const { data, error } = await supabase.storage
-      .from("avatars")
-      .upload(fileName, buffer, {
-        cacheControl: "3600",
-        contentType: "image/png",
-        upsert: false,
-      });
+    const user = await getUser();
+    if (!user) {
+      return NextResponse.json(
+        {
+          error: true,
+          message: "Login dulu.",
+        },
+        {
+          status: 401,
+        }
+      );
+    }
+    const { error } = await supabase
+      .from("profiles")
+      .update({
+        avatar_url: avatar,
+      })
+      .eq("id", user.id);
     if (error) {
       throw new Error(error.message);
     }
-    return NextResponse.json({
-      error: false,
-      message: "Avatar uploaded",
-      fileName: data.path,
-    });
+    const {
+      data: { publicUrl },
+    } = supabase.storage.from("avatars").getPublicUrl(avatar);
+    public_url = publicUrl;
   } catch (e: any) {
     console.error(e);
     if (e.message) {
@@ -55,11 +63,16 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(
       {
         error: true,
-        message: "Error uploading avatar",
+        message: "Error updating user avatar",
       },
       {
         status: 500,
       }
     );
   }
+  return NextResponse.json({
+    error: false,
+    message: "Success updating user avatar",
+    public_url,
+  });
 }

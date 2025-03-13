@@ -97,13 +97,14 @@ const Username: FC<UsernameProps> = ({ setCurrentPage }) => {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.9 }}
-              className="bg-gray-800 shadow-xl py-4 px-6 rounded-full flex items-center"
+              className="bg-white/35 backdrop-filter backdrop-blur text-black font-semibold shadow-xl py-4 px-6 rounded-full flex items-center"
             >
               <p>@</p>
               <input
-                className="outline-none bg-transparent"
+                className="outline-none bg-transparent placeholder-black"
                 placeholder="Name..."
                 value={username}
+                required
                 type="text"
                 onChange={(e) => setUsername(e.target.value)}
               />
@@ -115,12 +116,13 @@ const Username: FC<UsernameProps> = ({ setCurrentPage }) => {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
-                className="bg-gray-800 shadow-xl py-4 px-6 rounded-full flex items-center"
+                className="bg-white/35 backdrop-filter backdrop-blur text-black font-semibold shadow-xl py-4 px-6 rounded-full flex items-center"
               >
                 <input
-                  className="outline-none bg-transparent"
+                  className="placeholder-black outline-none bg-transparent"
                   placeholder="Email..."
                   type="email"
+                  required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
@@ -130,13 +132,14 @@ const Username: FC<UsernameProps> = ({ setCurrentPage }) => {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
-                className="bg-gray-800 shadow-xl py-4 px-6 rounded-full flex items-center mt-4"
+                className="bg-white/35 backdrop-filter backdrop-blur font-semibold text-black shadow-xl py-4 px-6 rounded-full flex items-center mt-4"
               >
                 <input
-                  className="outline-none bg-transparent"
+                  className="outline-none bg-transparent placeholder-black"
                   placeholder="Password..."
                   type="password"
                   value={password}
+                  required
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </motion.div>
@@ -146,7 +149,7 @@ const Username: FC<UsernameProps> = ({ setCurrentPage }) => {
         <button
           type="submit"
           disabled={isLoading}
-          className="bg-blue-500 relative flex justify-center items-center text-white py-2 px-6 rounded-lg hover:bg-blue-600 mt-10"
+          className="bg-white/75 relative flex justify-center items-center text-black font-semibold hover:scale-105 transition duration-150 py-2 px-6 rounded-lg hover:bg-white mt-10"
         >
           {isLoading ? (
             <div className="absolute h-full p-4 rounded-lg bg-opacity-5 backdrop-filter backdrop-blur w-full flex justify-center items-center">

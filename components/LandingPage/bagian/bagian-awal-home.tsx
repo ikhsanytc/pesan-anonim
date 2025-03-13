@@ -17,7 +17,7 @@ const BagianAwalHome: FC<NavbarHomeLayangProps> = ({
   setMenuStatus,
 }) => {
   return (
-    <div className="bg-gradient-to-b from-pink-500 to-orange-600 rounded-3xl">
+    <div className="bg-gradient-to-b from-blue-500 to-indigo-800 rounded-3xl">
       <div ref={ref} className="flex p-4 justify-between items-center z-50">
         <h1 className="text-3xl font-bold">Anonim</h1>
         <div className="lg:flex hidden gap-4 text-2xl font-bold">

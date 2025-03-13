@@ -13,7 +13,7 @@ const BagianKeduaHome: FC<BagianKeduaHomeProps> = ({
   bagianKe2Ref,
 }) => {
   return (
-    <div className="bg-gradient-to-b from-pink-500 to-orange-600 min-h-screen">
+    <div className="bg-gradient-to-b from-blue-500 to-indigo-700 min-h-screen">
       <WaveTerbalik />
       <motion.div
         key="bagian-ke2"

@@ -15,7 +15,7 @@ const BagianKeempatHome: FC<BagianKeempatHomeProps> = ({
   const nav = useRouter();
   return (
     <div ref={bagianKe4Ref} className="bg-black md:min-h-screen relative px-4">
-      <div className="bg-gradient-to-b rounded-b-3xl from-pink-500 to-orange-600 md:h-[500px] h-[300px]">
+      <div className="bg-gradient-to-b rounded-b-3xl from-blue-500 to-indigo-700 md:h-[500px] h-[300px]">
         <WaveTerbalik />
         <div className="flex flex-col justify-center items-center">
           <motion.h1
@@ -32,7 +32,7 @@ const BagianKeempatHome: FC<BagianKeempatHomeProps> = ({
           >
             <button
               onClick={() => nav.push("/register")}
-              className="bg-gradient-to-br from-green-500 via-orange-500 to-indigo-500 px-20 mt-5 rounded-2xl text-white font-semibold shadow-2xl py-4 hover:scale-105 hover:-translate-y-1 transition duration-150 md:text-xl"
+              className="bg-gradient-to-br from-blue-500 via-indigo-500 to-indigo-800 px-20 mt-5 rounded-2xl text-white font-semibold shadow-2xl py-4 hover:scale-105 hover:-translate-y-1 transition duration-150 md:text-xl"
             >
               Try!
             </button>

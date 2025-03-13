@@ -1,4 +1,4 @@
-import { createClient } from "@/utils/supabase/server";
+import { createClient, getAvatarUrl } from "@/utils/supabase/server";
 import MessageClient from "./pageClient";
 import ErrorPage from "@/app/error";
 import { Metadata } from "next";
@@ -21,12 +21,15 @@ const Message = async ({ params }: { params: Promise<{ name: string }> }) => {
     if (error) {
       throw Error(error.message);
     }
-    const {
-      data: { publicUrl },
-    } = supabase.storage.from("avatars").getPublicUrl(data.avatar_url);
-    return <MessageClient avatar_url={publicUrl} username={name} />;
-  } catch (e) {
+    const avatar_url = await getAvatarUrl(data.avatar_url);
+    return <MessageClient avatar_url={avatar_url} username={name} />;
+  } catch (e: any) {
     console.error(e);
+    if (e.message.includes("multiple (or no) rows returned")) {
+      return (
+        <ErrorPage message={`Orang dengan nama "${name}" tidak ditemukan!`} />
+      );
+    }
     return <ErrorPage />;
   }
 };

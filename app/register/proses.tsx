@@ -47,6 +47,7 @@ const Proses: FC<ProsesProps> = ({ setCurrentPage }) => {
           return;
         }
       } catch (e) {
+        console.error(e);
         toast.error("Terjadi kesalahan!");
         router.refresh();
         localStorage.removeItem("inforAge");
@@ -108,7 +109,7 @@ const Proses: FC<ProsesProps> = ({ setCurrentPage }) => {
       <div className="loaderNormal"></div>
       <div className="flex mt-2 flex-col gap-4 items-center justify-center">
         <div className="flex gap-2 items-center">
-          <p>{conditionLoading}</p>
+          <p className="font-semibold">{conditionLoading}</p>
         </div>
       </div>
     </motion.div>
