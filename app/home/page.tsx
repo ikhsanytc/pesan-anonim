@@ -1,13 +1,10 @@
-import { getAvatarUrl, getProfile, getUser } from "@/utils/supabase/server";
+import { Metadata } from "next";
 import ClientPage from "./clientPage";
-import { redirect } from "next/navigation";
 
+export const metadata: Metadata = {
+  title: "Home",
+  description: "Halaman utama pesn anaonim",
+};
 export default async function HomePage() {
-  const user = await getUser();
-  const profile = await getProfile();
-  if (!user || !profile) {
-    redirect("/register");
-  }
-  const avatar_url = await getAvatarUrl(profile.avatar_url);
-  return <ClientPage profile={profile} avatar_url={avatar_url} />;
+  return <ClientPage />;
 }

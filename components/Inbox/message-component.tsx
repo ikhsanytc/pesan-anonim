@@ -21,7 +21,7 @@ const MessageComponent: FC<MessageComponentProps> = ({ inbox }) => {
         onClick={() => router.push(`/home/inbox/view/${inbox.id}`)}
         className="w-full bg-slate-100 p-2 rounded-xl flex justify-between items-center cursor-pointer"
       >
-        <div className="flex gap-2 items-center">
+        <div className="flex gap-2 text-start items-center">
           <div>
             {inbox.read ? (
               <InboxIcon className="w-10" />

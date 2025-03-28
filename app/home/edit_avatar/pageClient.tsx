@@ -146,9 +146,9 @@ const EditAvatarClient: FC<EditAvatarClientProps> = ({
           />
           <div
             onClick={() => router.push("/home")}
-            className="absolute top-5 left-5 cursor-pointer"
+            className="absolute top-5 left-5 cursor-pointer hover:bg-gray-800 hover:text-white p-1 rounded-full transition duration-150"
           >
-            <ChevronLeftIcon className="w-10" />
+            <ChevronLeftIcon className="w-10 active:w-12 transition-all duration-150" />
           </div>
           <div className="absolute flex flex-col justify-center items-center">
             <motion.div
