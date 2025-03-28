@@ -1,6 +1,7 @@
-import { createClient } from "@/utils/supabase/server";
+import { createClient, getUser } from "@/utils/supabase/server";
 import ViewInboxClient from "./pageClient";
 import ErrorPage from "@/app/error";
+import { redirect } from "next/navigation";
 
 export default async function ViewInbox({
   params,
@@ -8,6 +9,10 @@ export default async function ViewInbox({
   params: Promise<{ id: number }>;
 }) {
   const { id } = await params;
+  const user = await getUser();
+  if (!user) {
+    redirect("/register");
+  }
   try {
     const supabase = await createClient();
     const { data, error } = await supabase

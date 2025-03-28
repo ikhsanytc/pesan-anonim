@@ -8,12 +8,14 @@ import { RealtimePostgresChangesPayload } from "@supabase/supabase-js";
 import React, { FC, useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { motion } from "motion/react";
+import { useRouter } from "next/navigation";
 
 const InboxClient: FC = () => {
   const [inbox, setInbox] = useState<InboxType[]>([]);
   const [loading, setLoading] = useState(true); // [inbox, setInbox]
   const inboxRef = useRef<InboxType[]>([]);
   const usernameRef = useRef("");
+  const router = useRouter();
   const [username, setUsername] = useState("");
 
   useEffect(() => {
@@ -21,6 +23,9 @@ const InboxClient: FC = () => {
       setLoading(true);
       const dataInbox = await getInbox();
       const profile = await getProfile();
+      if (!profile) {
+        router.push("/register");
+      }
       if (dataInbox.error) {
         toast.error(dataInbox.message);
         return;

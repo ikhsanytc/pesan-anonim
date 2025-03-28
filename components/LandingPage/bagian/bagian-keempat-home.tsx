@@ -1,7 +1,8 @@
-import React, { FC, RefObject } from "react";
+import React, { FC, RefObject, useEffect, useState } from "react";
 import WaveTerbalik from "../../svg/wave-terbalik";
 import { motion } from "motion/react";
 import { useRouter } from "next/navigation";
+import { getUser } from "@/utils/supabase/server";
 
 type BagianKeempatHomeProps = {
   isInViewBagianKe4: boolean;
@@ -12,7 +13,16 @@ const BagianKeempatHome: FC<BagianKeempatHomeProps> = ({
   bagianKe4Ref,
   isInViewBagianKe4,
 }) => {
+  const [isLogin, setIsLogin] = useState(false);
   const nav = useRouter();
+  useEffect(() => {
+    (async () => {
+      const user = await getUser();
+      if (user) {
+        setIsLogin(true);
+      }
+    })();
+  }, []);
   return (
     <div ref={bagianKe4Ref} className="bg-black md:min-h-screen relative px-4">
       <div className="bg-gradient-to-b rounded-b-3xl from-blue-500 to-indigo-700 md:h-[500px] h-[300px]">
@@ -31,7 +41,7 @@ const BagianKeempatHome: FC<BagianKeempatHomeProps> = ({
             transition={{ delay: 1 }}
           >
             <button
-              onClick={() => nav.push("/register")}
+              onClick={() => nav.push(isLogin ? "/home" : "/register")}
               className="bg-gradient-to-br from-blue-500 via-indigo-500 to-indigo-800 px-20 mt-5 rounded-2xl text-white font-semibold shadow-2xl py-4 hover:scale-105 hover:-translate-y-1 transition duration-150 md:text-xl"
             >
               Try!
