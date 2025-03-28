@@ -81,7 +81,6 @@ const InboxClient: FC = () => {
       setInbox(newInbox);
     }
   };
-  console.log(usernameRef.current);
   return (
     <motion.div layoutId="bg-white" className="bg-white min-h-screen">
       <ContainerHome currentPage="inbox">
